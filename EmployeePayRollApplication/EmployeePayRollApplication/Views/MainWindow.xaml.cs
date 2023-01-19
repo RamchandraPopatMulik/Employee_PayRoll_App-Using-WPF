@@ -105,21 +105,21 @@ namespace EmployeePayRollApplication
                     {
                         try
                         {
-                            SqlCommand sqlCommand = new SqlCommand("sp_InsertIntoEmployee", sqlConnection);
+                            SqlCommand sqlCommand = new SqlCommand("SPInsertEmployee", sqlConnection);
                             sqlCommand.CommandType = CommandType.StoredProcedure;
                             sqlConnection.Open();
-                            sqlCommand.Parameters.AddWithValue("@Name", Name_txt.Text);
-                            sqlCommand.Parameters.AddWithValue("@Profile", Profile);
+                            sqlCommand.Parameters.AddWithValue("@name", Name_txt.Text);
+                            sqlCommand.Parameters.AddWithValue("@profile", profile_Link);
                             sqlCommand.Parameters.AddWithValue("@Gender", GenderMenu.Text);
                             sqlCommand.Parameters.AddWithValue("@Department", string.Join(",",SelectedItem));
                             sqlCommand.Parameters.AddWithValue("@Salary", Sl_Value.Text);
-                            sqlCommand.Parameters.AddWithValue("@Date", date);
-                            sqlCommand.Parameters.AddWithValue("@Note", Notes_txt.Text);
+                            sqlCommand.Parameters.AddWithValue("@Start_Date", Date);
+                            sqlCommand.Parameters.AddWithValue("@Notes", Notes_txt.Text);
 
 
                             sqlCommand.ExecuteNonQuery();
                             sqlConnection.Close();
-                            MessageBox.Show("Data Added Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Data Added Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                             Clear();
                             DashBoard dashBoard = new DashBoard();
                             dashBoard.Show();

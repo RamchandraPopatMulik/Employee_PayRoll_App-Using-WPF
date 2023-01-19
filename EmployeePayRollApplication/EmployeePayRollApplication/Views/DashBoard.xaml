@@ -12,6 +12,16 @@
         <Label Content="Employee Details" HorizontalAlignment="Left" Height="29" Margin="42,60,0,0" VerticalAlignment="Top" Width="140" FontWeight="Bold" FontSize="16"/>
         <Button Content="+ Add User" HorizontalAlignment="Left" Height="29" Margin="675,60,0,0" VerticalAlignment="Top" Width="115" FontWeight="Bold" FontSize="16" Foreground="#FF4AC514"/>
         <Ellipse HorizontalAlignment="Left" Height="29" Margin="614,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="44"/>
+        <DataGrid HorizontalAlignment="Left" Height="280" Margin="42,108,0,0" VerticalAlignment="Top" Width="719" d:ItemsSource="{d:SampleData ItemCount=0}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="14" Header="Name" Width="200"/>
+                <DataGridTextColumn FontSize="14" Header="Gender" Width="100"/>
+                <DataGridTextColumn FontSize="14" Header="Department" Width="150"/>
+                <DataGridTextColumn FontSize="14" Header="Salary" Width="100"/>
+                <DataGridTextColumn FontSize="14" Header="Start_Date" Width="70"/>
+                <DataGridTextColumn FontSize="14" Header="Actions" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

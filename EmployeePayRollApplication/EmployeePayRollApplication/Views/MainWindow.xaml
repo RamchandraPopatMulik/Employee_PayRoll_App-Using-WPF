@@ -18,7 +18,7 @@
             <ComboBoxItem Content="Female"/>
         </ComboBox>
         <Label x:Name="Department" Content="Department" HorizontalAlignment="Left" Height="27" Margin="162,217,0,0" VerticalAlignment="Top" Width="90" FontSize="14"/>
-        <ListBox x:Name="Department1" HorizontalAlignment="Left" Height="29" Margin="262,215,0,0" VerticalAlignment="Top" Width="356">
+        <ListBox x:Name="Department1" HorizontalAlignment="Left" Height="48" Margin="262,0,0,0" VerticalAlignment="Center" Width="350" BorderThickness="0,0,0,0">
             <CheckBox x:Name="HR" Content="HR"/>
             <CheckBox x:Name="Sales" Content="Sales" Margin="120,-18,0,0"/>
             <CheckBox x:Name="Finance" Content="Finance" Margin="45,-23,0,0"/>
@@ -26,7 +26,7 @@
             <CheckBox x:Name="Others" Content="Others" Margin="250,-30,0,0"/>
         </ListBox>
         <Label x:Name="Salary" Content="Salary" HorizontalAlignment="Left" Height="27" Margin="162,249,0,0" VerticalAlignment="Top" Width="49" FontSize="14"/>
-        <Slider x:Name="Salary_Slider" HorizontalAlignment="Left" Height="18" Margin="262,260,0,0" VerticalAlignment="Top" Width="326" ValueChanged="Slider_ValueChanged_1" Maximum="100000" TickFrequency="100000"/>
+        <Slider x:Name="Salary_Slider" HorizontalAlignment="Left" Height="18" Margin="262,260,0,0" VerticalAlignment="Top" Width="326" Maximum="100000" TickFrequency="100000" IsSnapToTickEnabled="True"/>
         <Label x:Name="Start_Date" Content="Start Date" HorizontalAlignment="Left" Height="28" Margin="162,285,0,0" VerticalAlignment="Top" Width="80" FontSize="14"/>
         <ComboBox x:Name="date" HorizontalAlignment="Left" Height="23" Margin="262,285,0,0" VerticalAlignment="Top" Width="60" FontSize="14">
             <ComboBoxItem Content="1"/>
@@ -96,7 +96,7 @@
         <Button x:Name="Cancel_Button" Content="Cancel" HorizontalAlignment="Left" Height="38" Margin="162,388,0,0" VerticalAlignment="Top" Width="95" FontSize="14" Click="Cancel_Button_Click"/>
         <Button x:Name="Submit_Button" Content="Submit" HorizontalAlignment="Left" Height="38" Margin="500,388,0,0" VerticalAlignment="Top" Width="95" FontSize="14" Click="Submit_Button_Click"/>
         <Button x:Name="Reset_Button" Content="Reset" HorizontalAlignment="Left" Height="38" Margin="655,388,0,0" VerticalAlignment="Top" Width="95" FontSize="14" Click="Reset_Button_Click"/>
-        <RadioButton x:Name="a_radio" Content="" HorizontalAlignment="Left" Height="20" Margin="262,138,0,0" VerticalAlignment="Top" Width="20" Checked="RadioButton_Checked"/>
+        <RadioButton x:Name="a_radio" Content="" HorizontalAlignment="Left" Height="20" Margin="262,138,0,0" VerticalAlignment="Top" Width="20"/>
         <RadioButton x:Name="b_radio" Content="" HorizontalAlignment="Left" Height="20" Margin="330,138,0,0" VerticalAlignment="Top" Width="20"/>
         <RadioButton x:Name="c_radio" Content="" HorizontalAlignment="Left" Height="20" Margin="395,138,0,0" VerticalAlignment="Top" Width="20"/>
         <RadioButton x:Name="d_radio" Content="" HorizontalAlignment="Left" Height="20" Margin="470,138,0,0" VerticalAlignment="Top" Width="20"/>
