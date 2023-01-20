@@ -85,6 +85,7 @@ namespace EmployeePayRollApplication
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             DashBoard dashBoard = new DashBoard();
+            dashBoard.LoadGrid();
             dashBoard.Show();
             this.Close();
         }
@@ -95,7 +96,7 @@ namespace EmployeePayRollApplication
         }
         private void Submit_Button_Click(object sender, RoutedEventArgs e)
         {
-           if(!isUpdate)
+            if (!isUpdate)
             {
                 if (IsValid())
                 {
@@ -111,7 +112,54 @@ namespace EmployeePayRollApplication
                             sqlCommand.Parameters.AddWithValue("@name", Name_txt.Text);
                             sqlCommand.Parameters.AddWithValue("@profile", profile_Link);
                             sqlCommand.Parameters.AddWithValue("@Gender", GenderMenu.Text);
-                            sqlCommand.Parameters.AddWithValue("@Department", string.Join(",",SelectedItem));
+                            sqlCommand.Parameters.AddWithValue("@Department", string.Join(",", SelectedItem));
+                            sqlCommand.Parameters.AddWithValue("@Salary", Sl_Value.Text);
+                            sqlCommand.Parameters.AddWithValue("@Start_Date", Date);
+                            sqlCommand.Parameters.AddWithValue("@Notes", Notes_txt.Text);
+
+
+                            int addOrNot = sqlCommand.ExecuteNonQuery();
+                            if (addOrNot >= 1)
+                            {
+                                MessageBox.Show("User Added Successfully", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("User Name Already Exists!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                            sqlConnection.Close();
+                            MessageBox.Show("Data Added Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Clear();
+                            DashBoard dashBoard = new DashBoard();
+                            dashBoard.LoadGrid();
+                            dashBoard.Show();
+                            this.Close();
+                        }
+                        catch (SqlException ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (IsValid())
+                {
+                    string Date = date.Text + " " + month.Text + " " + year.Text;
+                    var SelectedItem = Department1.Items.Cast<CheckBox>().Where(x => x.IsChecked == true).Select(x => x.Content).ToList();
+                    using (sqlConnection)
+                    {
+                        try
+                        {
+                            SqlCommand sqlCommand = new SqlCommand("SPUpdateEmployee", sqlConnection);
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+                            sqlConnection.Open();
+                            sqlCommand.Parameters.AddWithValue("@empId", EmpId);
+                            sqlCommand.Parameters.AddWithValue("@name", Name_txt.Text);
+                            sqlCommand.Parameters.AddWithValue("@profile", profile_Link);
+                            sqlCommand.Parameters.AddWithValue("@Gender", GenderMenu.Text);
+                            sqlCommand.Parameters.AddWithValue("@Department", string.Join(",", SelectedItem));
                             sqlCommand.Parameters.AddWithValue("@Salary", Sl_Value.Text);
                             sqlCommand.Parameters.AddWithValue("@Start_Date", Date);
                             sqlCommand.Parameters.AddWithValue("@Notes", Notes_txt.Text);
@@ -119,13 +167,14 @@ namespace EmployeePayRollApplication
 
                             sqlCommand.ExecuteNonQuery();
                             sqlConnection.Close();
-                            MessageBox.Show("Data Added Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
+                            MessageBox.Show("Data Updated Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                             Clear();
                             DashBoard dashBoard = new DashBoard();
+                            dashBoard.LoadGrid();
                             dashBoard.Show();
                             this.Close();
                         }
-                        catch(SqlException ex)
+                        catch (SqlException ex)
                         {
                             MessageBox.Show(ex.Message);
                         }
