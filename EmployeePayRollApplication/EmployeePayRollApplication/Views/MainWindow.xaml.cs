@@ -118,15 +118,8 @@ namespace EmployeePayRollApplication
                             sqlCommand.Parameters.AddWithValue("@Notes", Notes_txt.Text);
 
 
-                            int addOrNot = sqlCommand.ExecuteNonQuery();
-                            if (addOrNot >= 1)
-                            {
-                                MessageBox.Show("User Added Successfully", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("User Name Already Exists!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
+                            sqlCommand.ExecuteNonQuery();
+                           
                             sqlConnection.Close();
                             MessageBox.Show("Data Added Successfully ", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                             Clear();

@@ -15,11 +15,6 @@
     <None Remove="Images\Ellipse -3.png" />
     <None Remove="Images\Ellipse -4.png" />
     <None Remove="Images\pro.png" />
-    <None Remove="Views\Ellipse -1.png" />
-    <None Remove="Views\Ellipse -2.png" />
-    <None Remove="Views\Ellipse -3.png" />
-    <None Remove="Views\Ellipse -4.png" />
-    <None Remove="Views\pro.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,11 +29,6 @@
     <Resource Include="Images\Ellipse -3.png" />
     <Resource Include="Images\Ellipse -4.png" />
     <Resource Include="Images\pro.png" />
-    <Resource Include="Views\Ellipse -1.png" />
-    <Resource Include="Views\Ellipse -2.png" />
-    <Resource Include="Views\Ellipse -3.png" />
-    <Resource Include="Views\Ellipse -4.png" />
-    <Resource Include="Views\pro.png" />
   </ItemGroup>
 
 </Project>
