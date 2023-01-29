@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeePayRollApplication.Model
 {
-    internal class EmployeeModel
+    public class EmployeeModel
     {
         public int empId { get; set; }
         public string? name { get; set; }

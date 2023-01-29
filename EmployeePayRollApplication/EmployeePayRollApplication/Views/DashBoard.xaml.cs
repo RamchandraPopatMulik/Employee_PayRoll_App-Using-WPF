@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EmployeePayRollApplication.Model;
+using EmployeePayRollApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -25,19 +27,12 @@ namespace EmployeePayRollApplication
         {
             InitializeComponent();
             LoadGrid();
-
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Server=DESKTOP-ICFRQNG;Database=Fundoo;User Id=DESKTOP-ICFRQNG/Ramchandra;Password=;TrustServerCertificate=True;Integrated Security=SSPI;");
+        DashBords dashBords = new DashBords();
 
         public void LoadGrid()
         {
-            SqlCommand sqlCommand = new SqlCommand("Select empId,name,profile,Gender,Department,Salary,Start_Date,Notes from EmployeeData",sqlConnection);
-            DataTable dataTable = new DataTable();
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-            dataTable.Load(sqlDataReader);
-            sqlConnection.Close();
-            datagrid.ItemsSource=dataTable.DefaultView;
+            datagrid.ItemsSource=dashBords.GetAllEmployee();
         }
         private void Add_User(object sender, RoutedEventArgs e)
         {
@@ -48,36 +43,47 @@ namespace EmployeePayRollApplication
 
         private void DeleteEvent(object sender, RoutedEventArgs e)
         {
-            DataRowView dataRowView = (DataRowView)datagrid.SelectedItem;
-            MessageBoxResult messageBoxResult = MessageBox.Show("Are You Sure ???","Delete Confirmation",MessageBoxButton.YesNo);
-            if(messageBoxResult == MessageBoxResult.Yes)
+            try
             {
-                SqlCommand sqlCommand = new SqlCommand("SPDeleteEmployee", sqlConnection);
-                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                sqlConnection.Open();
-                sqlCommand.Parameters.AddWithValue("empId", dataRowView["empId"]);
-                sqlCommand.ExecuteNonQuery();
-                sqlConnection.Close();
-                LoadGrid();
+                EmployeeModel data = (EmployeeModel)datagrid.SelectedItem;
+                MessageBoxResult result = MessageBox.Show("Are you sure?", "Datete Conformation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+
+                    dashBords.DeleteEmployee(data.empId);
+                    LoadGrid();
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private void EditEvent(object sender, RoutedEventArgs e)
         {
-            DataRowView dataRowView = (DataRowView)datagrid.SelectedItem;
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Name_txt.Text = dataRowView["name"].ToString();
-            mainWindow.GenderMenu.Text = dataRowView["Gender"].ToString();
-            mainWindow.Sl_Value.Text = dataRowView["Salary"].ToString();
-            string fullDate = dataRowView["Start_Date"].ToString();
-            string[] Date = fullDate.Split(' ');
-            mainWindow.date.Text = Date[0];
-            mainWindow.month.Text = Date[1];
-            mainWindow.year.Text = Date[2];
-            mainWindow.Notes_txt.Text = dataRowView["Notes"].ToString();
-            mainWindow.isUpdate = true;
-            mainWindow.EmpId = Convert.ToInt32(dataRowView["empId"]);
-            mainWindow.Show();
-            this.Close();  
+            try
+            {
+                EmployeeModel employeeModel = (EmployeeModel)datagrid.SelectedItem;
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Name_txt.Text = employeeModel.name;
+                mainWindow.GenderMenu.Text = employeeModel.Gender;
+                mainWindow.Sl_Value.Text = employeeModel.Salary;
+                string fullDate = employeeModel.Start_Date;
+                string[] Date = fullDate.Split(' ');
+                mainWindow.date.Text = Date[0];
+                mainWindow.month.Text = Date[1];
+                mainWindow.year.Text = Date[2];
+                mainWindow.Notes_txt.Text = employeeModel.Notes;
+                mainWindow.isUpdate = true;
+                mainWindow.EmpId = employeeModel.empId;
+                mainWindow.Show();
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
